@@ -1,5 +1,5 @@
 # S3Redirector
-Small server which authenticates with an S3 object storage service, generate signed URLs, and redirect to them. Does not serve any files itself!
+Small server which authenticates with an S3 object storage service, generates signed URLs, and redirects to them. Does not serve any files itself!
 
 Requires Java 17.
 
@@ -26,7 +26,7 @@ Downloads are currently available on the Minebench.de CI server: https://ci.mine
 This program is licensed under the terms of the [AGPLv3](LICENSE).
 
 ```
- Copyright (C) 2020 Max Lee aka Phoenix616 (max@themoep.de)
+ Copyright (C) 2023 Max Lee aka Phoenix616 (max@themoep.de)
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published
