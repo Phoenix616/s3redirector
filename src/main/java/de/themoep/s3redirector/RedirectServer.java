@@ -3,7 +3,6 @@ package de.themoep.s3redirector;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
@@ -20,12 +19,13 @@ public class RedirectServer {
 	private final int redirectCode;
 	private final LoadingCache<String, String> cache;
 
-	public RedirectServer(String host, int port, long cacheExpiration, Function<String, String> redirector, int redirectCode) {
+	public RedirectServer(String host, int port, long cacheExpiration, long cacheSize, Function<String, String> redirector, int redirectCode) {
 		this.host = host;
 		this.port = port;
 		this.redirectCode = redirectCode;
 		this.cache = Caffeine.newBuilder()
 				.expireAfterWrite(cacheExpiration - 100, TimeUnit.MILLISECONDS)
+				.maximumSize(cacheSize)
 				.build(redirector::apply);
 	}
 

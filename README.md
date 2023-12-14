@@ -20,6 +20,7 @@ The configuration is either done via system properties, a config.properties or e
 | `s3r.bucket`       | `bucket`       | `S3R_BUCKET`       |             | The bucket to use                           |
 | `s3r.endpoint`     | `endpoint`     | `S3R_ENDPOINT`     |             | The endpoint to use for the S3 service      |
 | `s3r.expiration`   | `expiration`   | `S3R_EXPIRATION`   | `3600`      | The expiration time for signed URLs in secs |
+| `s3r.cachesize`    | `cachesize`    | `S3R_CACHESIZE`    | `10000`     | The size of the url cache                   |
 | `s3r.debug`        | `debug`        | `S3R_DEBUG`        | `false`     | Whether to enable debug logging of requests |
 
 ## Downloads

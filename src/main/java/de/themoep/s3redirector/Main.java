@@ -73,8 +73,9 @@ public class Main {
 
 		String host = getValue("host", "127.0.0.1");
 		int port = Integer.parseInt(getValue("port", "8053"));
+		long cacheSize = Long.parseLong(getValue("cachesize", "10000"));
 
-		new RedirectServer(host, port, expiration, path -> {
+		new RedirectServer(host, port, expiration, cacheSize, path -> {
 			String[] parts = path.split("/", 2);
 			if (parts.length != 2) {
 				return null;
