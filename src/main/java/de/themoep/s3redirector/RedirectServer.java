@@ -32,29 +32,26 @@ public class RedirectServer {
 	public void start() {
 		try {
 			HttpServer server = HttpServer.create(new InetSocketAddress(host, port), 0);
-			server.createContext("/", new HttpHandler() {
-				@Override
-				public void handle(HttpExchange exchange) throws IOException {
-					String requestMethod = exchange.getRequestMethod();
-					String path = exchange.getRequestURI().getPath();
-					if (Main.debug) {
-						logDebug("Got request: " + requestMethod + " " + path);
-					}
-					if ("GET".equals(requestMethod)) {
-						String redirectUrl = cache.get(path);
-						if (redirectUrl != null) {
-							exchange.getResponseHeaders().set("Location", redirectUrl);
-							reply(exchange, redirectCode, redirectUrl);
-						} else {
-							// Not Found if the object does not exist
-							reply(exchange, 404, "Not Found");
-						}
-					} else {
-						// Method Not Allowed if not a GET request
-						reply(exchange, 405, "Method Not Allowed");
-					}
-					exchange.close();
+			server.createContext("/", exchange -> {
+				String requestMethod = exchange.getRequestMethod();
+				String path = exchange.getRequestURI().getPath();
+				if (Main.debug) {
+					logDebug("Got request: " + requestMethod + " " + path);
 				}
+				if ("GET".equals(requestMethod)) {
+					String redirectUrl = cache.get(path);
+					if (redirectUrl != null) {
+						exchange.getResponseHeaders().set("Location", redirectUrl);
+						reply(exchange, redirectCode, redirectUrl);
+					} else {
+						// Not Found if the object does not exist
+						reply(exchange, 404, "Not Found");
+					}
+				} else {
+					// Method Not Allowed if not a GET request
+					reply(exchange, 405, "Method Not Allowed");
+				}
+				exchange.close();
 			});
 			server.setExecutor(Executors.newCachedThreadPool());
 			server.start();
