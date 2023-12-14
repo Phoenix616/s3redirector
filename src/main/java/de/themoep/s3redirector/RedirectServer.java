@@ -1,6 +1,5 @@
 package de.themoep.s3redirector;
 
-import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.sun.net.httpserver.HttpServer;
@@ -26,7 +25,7 @@ public class RedirectServer {
 		this.port = port;
 		this.redirectCode = redirectCode;
 		this.cache = Caffeine.newBuilder()
-				.expireAfterWrite(cacheExpiration, TimeUnit.MILLISECONDS)
+				.expireAfterWrite(cacheExpiration - 100, TimeUnit.MILLISECONDS)
 				.build(redirector::apply);
 	}
 

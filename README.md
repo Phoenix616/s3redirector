@@ -1,6 +1,8 @@
 # S3Redirector
 Small server which authenticates with an S3 object storage service, generates signed URLs, and redirects to them. Does not serve any files itself!
 
+While this program includes some basic caching I strongly suggest running this behind a caching reverse proxy like nginx. (Especially if you want to use SSL! Which you should.)
+
 Requires Java 17.
 
 ## Configuration
@@ -17,6 +19,7 @@ The configuration is either done via system properties, a config.properties or e
 | `s3r.region`       | `region`       | `S3R_REGION`       |             | The region of the S3 service                |
 | `s3r.bucket`       | `bucket`       | `S3R_BUCKET`       |             | The bucket to use                           |
 | `s3r.endpoint`     | `endpoint`     | `S3R_ENDPOINT`     |             | The endpoint to use for the S3 service      |
+| `s3r.expiration`   | `expiration`   | `S3R_EXPIRATION`   | `3600`      | The expiration time for signed URLs in secs |
 | `s3r.debug`        | `debug`        | `S3R_DEBUG`        | `false`     | Whether to enable debug logging of requests |
 
 ## Downloads
