@@ -30,7 +30,7 @@ public class Main {
 
 	static Properties config = new Properties();
 
-	private static boolean debug = true;
+	static boolean debug = true;
 
 	public static void main(String[] args) {
 		Properties appInfo = new Properties();

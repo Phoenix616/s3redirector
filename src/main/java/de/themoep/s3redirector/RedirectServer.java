@@ -37,12 +37,14 @@ public class RedirectServer {
 				public void handle(HttpExchange exchange) throws IOException {
 					String requestMethod = exchange.getRequestMethod();
 					String path = exchange.getRequestURI().getPath();
-					logDebug("Got request: " + requestMethod + " " + path);
+					if (Main.debug) {
+						logDebug("Got request: " + requestMethod + " " + path);
+					}
 					if ("GET".equals(requestMethod)) {
 						String redirectUrl = cache.get(path);
 						if (redirectUrl != null) {
 							exchange.getResponseHeaders().set("Location", redirectUrl);
-							reply(exchange, redirectCode, "Redirect " + redirectUrl);
+							reply(exchange, redirectCode, redirectUrl);
 						} else {
 							// Not Found if the object does not exist
 							reply(exchange, 404, "Not Found");
@@ -65,7 +67,9 @@ public class RedirectServer {
 	private void reply(HttpExchange exchange, int code, String message) {
 		try {
 			exchange.sendResponseHeaders(code, -1);
-			logDebug("Replied with " + code + ": " + message);
+			if (Main.debug) {
+				logDebug("Replied with " + code + ": " + message);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
