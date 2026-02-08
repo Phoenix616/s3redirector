@@ -1,3 +1,10 @@
+> [!CAUTION]
+> ## Repository is archived as I'm leaving GitHub!
+>
+> GitHub wants me to "embrace AI or get out". So I'm leaving.
+> 
+> Continued development will happen on Codeberg: https://codeberg.org/Phoenix616/s3redirector
+
 # S3Redirector
 Small server which authenticates with an S3 object storage service, generates signed URLs, and redirects to them. Does not serve any files itself!
 
